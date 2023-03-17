@@ -1,6 +1,3 @@
-This repo is the official implementation of the paper "Action-GPT: Leveraging Large-scale Language Models for Improved and Generalized Action Generation".
-
-
 <p align="center">
 
   <h1 align="center">Action-GPT: Leveraging Large-scale Language Models for Improved and Generalized Action Generation</h1>
@@ -15,10 +12,6 @@ This repo is the official implementation of the paper "Action-GPT: Leveraging La
   <h2 align="center">ICME 2023</h2>
   <div align="center">
   </div>
-
-  <a href="">
-    <img src="./images/teaser.gif" alt="Logo" width="100%">
-  </a>
 
 
 <p align="center">
