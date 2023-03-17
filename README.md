@@ -66,21 +66,21 @@ To install the dependencies please follow the next steps:
     ```
 - Install the dependencies of respective models by following the steps below:
     -   Action-GPT-TEACH
-     -  ```
-        cd Action-GPT_TEACH_k-4/
-        ```
-     -   Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
-     -   Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
+        -  ```
+            cd Action-GPT_TEACH_k-4/
+            ```
+        -   Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
+        -   Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
 
     -   Action-GPT-TEMOS
-      -  Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
+        -  Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
 
     -   Action-GPT-MotionCLIP
-      - ```
-        cd Action-GPT_MotionCLIP_k-4/
-        ```    
-     -   Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
-     -   Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
+        -  ```
+            cd Action-GPT_MotionCLIP_k-4/
+            ```  
+        -   Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
+        -   Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
 
 - After installing the dependencies of the respective models, install openai as mentioned below to use GPT,
     ```Shell
