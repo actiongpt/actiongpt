@@ -63,21 +63,21 @@ To install the dependencies please follow the next steps:
     ```
 - Install the dependencies of respective models by following the steps below:
     - 	Action-GPT-TEACH
-		    ```
+		 -   ```
 		    cd Action-GPT_TEACH_k-4/
 		    ```
-		    Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
-		    Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
+		 -   Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
+		 -   Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
 
     - 	Action-GPT-TEMOS
-		    Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
+		  -  Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
 
     - 	Action-GPT-MotionCLIP
-		    ```
+		  -  ```
 		    cd Action-GPT_MotionCLIP_k-4/
 		    ```    
-		    Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
-		    Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
+		 -   Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
+		 -   Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
 
 - After installing the dependencies of the respective models, install openai as mentioned below to use GPT,
     ```Shell
@@ -93,13 +93,13 @@ To install the dependencies please follow the next steps:
 
 ## Running the Demo
 - Action-GPT-TEACH (or) Action-GPT-TEMOS
-	Check out the steps to run the demo on any arbitary text descriptions from [here](https://github.com/athn-nik/teach#running-the-demo)
-	The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory.
-	NOTE : As Action-GPT-TEMOS is trained for single text descriptions, the demo can be executed for only single text prompts. 
+	- Check out the steps to run the demo on any arbitary text descriptions from [here](https://github.com/athn-nik/teach#running-the-demo)
+	- The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory.
+	- NOTE : As Action-GPT-TEMOS is trained for single text descriptions, the demo can be executed for only single text prompts. 
 
 - Action-GPT-MotionCLIP:
-	Check out the steps to generate motion from text [here](https://github.com/GuyTevet/MotionCLIP#1-text-to-motion)
-	The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory.
+	- Check out the steps to generate motion from text [here](https://github.com/GuyTevet/MotionCLIP#1-text-to-motion)
+	- The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory.
 
 Pretrained Models and code of Action-GPT-TEMOS and Action-GPT-MotionCLIP coming soon.
 
