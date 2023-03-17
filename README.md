@@ -13,6 +13,9 @@
   <div align="center">
   </div>
 
+  <a href="">
+    <img src="./images/teaser.gif" alt="Logo" width="100%">
+  </a>
 
 <p align="center">
   <br>
@@ -62,44 +65,44 @@ To install the dependencies please follow the next steps:
     cd actiongpt
     ```
 - Install the dependencies of respective models by following the steps below:
-    - 	Action-GPT-TEACH
-		 -   ```
-		    cd Action-GPT_TEACH_k-4/
-		    ```
-		 -   Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
-		 -   Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
+    -   Action-GPT-TEACH
+     -  ```
+        cd Action-GPT_TEACH_k-4/
+        ```
+     -   Install DistillBERT and requirements from [here](https://github.com/athn-nik/teach#getting-started)
+     -   Download and setup the data as mentioned [here](https://github.com/athn-nik/teach#data)
 
-    - 	Action-GPT-TEMOS
-		  -  Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
+    -   Action-GPT-TEMOS
+      -  Since TEACH is an extension of TEMOS, the same installation and data setups used for Action-GPT-TEACH can be used here.
 
-    - 	Action-GPT-MotionCLIP
-		  -  ```
-		    cd Action-GPT_MotionCLIP_k-4/
-		    ```    
-		 -   Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
-		 -   Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
+    -   Action-GPT-MotionCLIP
+      - ```
+        cd Action-GPT_MotionCLIP_k-4/
+        ```    
+     -   Install requirements from [here](https://github.com/GuyTevet/MotionCLIP#getting-started)
+     -   Download and setup the data as mentioned [here](https://github.com/GuyTevet/MotionCLIP#1-create-conda-environment)
 
 - After installing the dependencies of the respective models, install openai as mentioned below to use GPT,
     ```Shell
-	pip install openai
+  pip install openai
     ```
 
 #### GPT descriptions
 - We provided `gpt3_annotations.json` for all the models which consists of the gpt3 descriptions for the train and test action phrases of the respective data loaders.
 - OpenAI API key
-	- OpenAI API key need to be provided to generate GPT-3 descriptions for the action phrases which doesn't exist in `gpt3_annotations.json`.
-	- Update your API-Key in `gpt_annotator.py`
+  - OpenAI API key need to be provided to generate GPT-3 descriptions for the action phrases which doesn't exist in `gpt3_annotations.json`.
+  - Update your API-Key in `gpt_annotator.py`
 
 
 ## Running the Demo
 - Action-GPT-TEACH (or) Action-GPT-TEMOS
-	- Check out the steps to run the demo on any arbitary text descriptions from [here](https://github.com/athn-nik/teach#running-the-demo)
-	- The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory.
-	- NOTE : As Action-GPT-TEMOS is trained for single text descriptions, the demo can be executed for only single text prompts. 
+  - Check out the steps to run the demo on any arbitary text descriptions from [here](https://github.com/athn-nik/teach#running-the-demo)
+  - The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory.
+  - NOTE : As Action-GPT-TEMOS is trained for single text descriptions, the demo can be executed for only single text prompts. 
 
 - Action-GPT-MotionCLIP:
-	- Check out the steps to generate motion from text [here](https://github.com/GuyTevet/MotionCLIP#1-text-to-motion)
-	- The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory.
+  - Check out the steps to generate motion from text [here](https://github.com/GuyTevet/MotionCLIP#1-text-to-motion)
+  - The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory.
 
 Pretrained Models and code of Action-GPT-TEMOS and Action-GPT-MotionCLIP coming soon.
 
@@ -113,11 +116,11 @@ Coming soon.
 
 ```
 @inproceedings{Action-GPT,
-	title = {Action-GPT: Leveraging Large-scale Language Models for Improved and Generalized Action Generation},
-	author = {Kalakonda, Sai Shashank and Maheshwari, Shubh and Sarvadevabhatla, Ravi Kiran},
-	booktitle = {IEEE International Conference on Multimedia and Expo ({ICME})},
-	year = {2023},
-	url = {https://actiongpt.github.io/}
+  title = {Action-GPT: Leveraging Large-scale Language Models for Improved and Generalized Action Generation},
+  author = {Kalakonda, Sai Shashank and Maheshwari, Shubh and Sarvadevabhatla, Ravi Kiran},
+  booktitle = {IEEE International Conference on Multimedia and Expo ({ICME})},
+  year = {2023},
+  url = {https://actiongpt.github.io/}
 }
 ```
 
