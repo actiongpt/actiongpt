@@ -1,0 +1,202 @@
+hydra:
+  run:
+    dir: ${project}/${data.dataname}/${experiment}/${run_id}
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      colorlog:
+        (): colorlog.ColoredFormatter
+        format: '[%(cyan)s%(asctime)s%(reset)s][%(purple)sHYDRA%(reset)s] %(message)s'
+        datefmt: '%d/%m/%y %H:%M:%S'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: colorlog
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    filters:
+      onlyimportant:
+        (): teach.tools.logging.LevelsFilter
+        levels:
+        - CRITICAL
+        - ERROR
+        - WARNING
+      noimportant:
+        (): teach.tools.logging.LevelsFilter
+        levels:
+        - INFO
+        - DEBUG
+        - NOTSET
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+        datefmt: '%d/%m/%y %H:%M:%S'
+      colorlog:
+        (): colorlog.ColoredFormatter
+        format: '[%(cyan)s%(asctime)s%(reset)s][%(blue)s%(name)s%(reset)s][%(log_color)s%(levelname)s%(reset)s]
+          - %(message)s'
+        datefmt: '%d/%m/%y %H:%M:%S'
+      log_colors:
+        DEBUG: purple
+        INFO: green
+        WARNING: yellow
+        ERROR: red
+        CRITICAL: red
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: colorlog
+        stream: ext://sys.stdout
+      file_out:
+        class: logging.FileHandler
+        formatter: simple
+        filename: logs.out
+        filters:
+        - noimportant
+      file_err:
+        class: logging.FileHandler
+        formatter: simple
+        filename: logs.err
+        filters:
+        - onlyimportant
+    root:
+      level: ${logger_level}
+      handlers:
+      - console
+      - file_out
+      - file_err
+    disable_existing_loggers: false
+  env: {}
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra: []
+    task:
+    - experiment=baseline
+    - logger=none
+  job:
+    name: train
+    override_dirname: experiment=baseline,logger=none
+    id: ???
+    num: ???
+    config_name: train
+    env_set:
+      PYOPENGL_PLATFORM: egl
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.1.1
+    cwd: /data3/charades/sai.shashank/ICME_Submission/actiongpt/teach_bs4_gpu4_gpt3_k-4
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: /data3/charades/sai.shashank/ICME_Submission/actiongpt/teach_bs4_gpu4_gpt3_k-4/configs
+      schema: file
+      provider: main
+    - path: hydra_plugins.hydra_colorlog.conf
+      schema: pkg
+      provider: hydra-colorlog
+    - path: ''
+      schema: structured
+      provider: schema
+    choices:
+      callback: base
+      logger: none
+      sampler: variable_conseq
+      trainer: base
+      machine: server
+      model: teach
+      model/optim: adamw
+      model/losses: teach
+      model/motiondecoder: actor
+      model/motionencoder: actor
+      model/textencoder: text_hist
+      data: babel-amass
+      transforms/joints2jfeats@data.transforms.joints2jfeats: rifke
+      transforms/rots2joints@data.transforms.rots2joints: smplh
+      transforms/rots2rfeats@data.transforms.rots2rfeats: globvelandy
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: custom
+      hydra/hydra_logging: custom
+      hydra/hydra_help: default
+      hydra/help: default
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: false

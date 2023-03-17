@@ -1,0 +1,227 @@
+data:
+  transforms:
+    rots2rfeats:
+      name: Globalvelandy
+      _target_: teach.transforms.rots2rfeats.Globalvelandy
+      pose_rep: rot6d
+      path: ${path.deps}/transforms/rots2rfeats/globalvelandy/${.pose_rep}/${data.dataname}/${data.dtype}
+      canonicalize: true
+      normalization: ${transforms.normalization}
+    rots2joints:
+      name: SMPLH
+      _target_: teach.transforms.rots2joints.SMPLH
+      jointstype: mmm
+      input_pose_rep: matrix
+      path: ${path.data}/smpl_models/smplh
+      batch_size: ${machine.smpl_batch_size}
+      gender: male
+    joints2jfeats:
+      name: Rifke
+      _target_: teach.transforms.joints2jfeats.Rifke
+      path: ${path.deps}/transforms/joints2jfeats/rifke/${data.dataname}
+      normalization: ${transforms.normalization}
+      forward_filter: false
+    name: SMPLTransform
+    ename: smpl
+    _target_: teach.transforms.SMPLTransform
+    normalization: true
+  dataname: babel-amass
+  _target_: teach.data.babel.BABELDataModule
+  dtype: separate_pairs
+  datapath: ${path.data}/babel/babel-smplh-30fps-male
+  smplh_path: ${path.data}/smpl_models/smplh
+  load_with_rot: true
+  batch_size: ${machine.batch_size}
+  num_workers: ${machine.num_workers}
+  framerate: 30
+  sampler: ${sampler}
+  tiny: false
+  walk_only: false
+  kit_only: false
+  mode: train
+  progress_bar: true
+model:
+  textencoder:
+    name: distilbert_linear_encoder
+    _target_: teach.model.textencoder.text_hist.TextHist
+    latent_dim: ${model.latent_dim}
+    vae: ${model.vae}
+    ff_size: ${model.ff_size}
+    num_layers: ${model.num_layers}
+    num_head: ${model.num_head}
+    droupout: ${model.droupout}
+    activation: ${model.activation}
+    finetune: false
+    modelpath: ${path.deps}/distilbert-base-uncased
+    hist_frames: ${model.hist_frames}
+  motionencoder:
+    name: actor_encoder
+    _target_: teach.model.motionencoder.ActorAgnosticEncoder
+    latent_dim: ${model.latent_dim}
+    vae: ${model.vae}
+    ff_size: ${model.ff_size}
+    num_layers: ${model.num_layers}
+    num_head: ${model.num_head}
+    droupout: ${model.droupout}
+    activation: ${model.activation}
+  motiondecoder:
+    name: actor_decoder
+    _target_: teach.model.motiondecoder.ActorAgnosticDecoder
+    latent_dim: ${model.latent_dim}
+    ff_size: ${model.ff_size}
+    num_layers: ${model.num_layers}
+    num_head: ${model.num_head}
+    droupout: ${model.droupout}
+    activation: ${model.activation}
+  losses:
+    _target_: teach.model.losses.TeachComputeLosses
+    mode: ${transforms.ename}
+    loss_on_transition: true
+    loss_on_velocities: false
+    lmd_rfeats_recons: 1.0
+    lmd_jfeats_recons: 1.0
+    lmd_vel_recons: 0.5
+    lmd_latent: 1.0e-05
+    lmd_kl: 1.0e-05
+    loss_on_both: true
+    loss_on_jfeats: false
+    recons_text2rfeats_vel_0: ${.lmd_vel_recons}
+    recons_text2rfeats_vel_1: ${.lmd_vel_recons}
+    recons_text2rfeats_vel_0_func: ${model.func_recons}
+    recons_text2rfeats_vel_1_func: ${model.func_recons}
+    recons_text2rfeats_0: ${.lmd_rfeats_recons}
+    recons_text2rfeats_1: ${.lmd_rfeats_recons}
+    recons_text2rfeats_0_func: ${model.func_recons}
+    recons_text2rfeats_1_func: ${model.func_recons}
+    recons_text2jfeats_0: ${.lmd_jfeats_recons}
+    recons_text2jfeats_1: ${.lmd_jfeats_recons}
+    recons_text2jfeats_0_func: ${model.func_recons}
+    recons_text2jfeats_1_func: ${model.func_recons}
+    recons_rfeats2rfeats_0: ${.lmd_rfeats_recons}
+    recons_rfeats2rfeats_1: ${.lmd_rfeats_recons}
+    recons_rfeats2rfeats_0_func: ${model.func_recons}
+    recons_rfeats2rfeats_1_func: ${model.func_recons}
+    recons_jfeats2jfeats_0: ${.lmd_jfeats_recons}
+    recons_jfeats2jfeats_1: ${.lmd_jfeats_recons}
+    recons_jfeats2jfeats_0_func: ${model.func_recons}
+    recons_jfeats2jfeats_1_func: ${model.func_recons}
+    latent_manifold_0: ${.lmd_latent}
+    latent_manifold_1: ${.lmd_latent}
+    latent_manifold_0_func: ${model.func_latent}
+    latent_manifold_1_func: ${model.func_latent}
+    kl_text_0: ${.lmd_kl}
+    kl_text_1: ${.lmd_kl}
+    kl_text_0_func: ${model.func_kl}
+    kl_text_1_func: ${model.func_kl}
+    kl_motion_0: ${.lmd_kl}
+    kl_motion_1: ${.lmd_kl}
+    kl_motion_0_func: ${model.func_kl}
+    kl_motion_1_func: ${model.func_kl}
+    kl_text2motion_0: ${.lmd_kl}
+    kl_text2motion_1: ${.lmd_kl}
+    kl_text2motion_0_func: ${model.func_kl}
+    kl_text2motion_1_func: ${model.func_kl}
+    kl_motion2text_0: ${.lmd_kl}
+    kl_motion2text_1: ${.lmd_kl}
+    kl_motion2text_0_func: ${model.func_kl}
+    kl_motion2text_1_func: ${model.func_kl}
+  optim:
+    _target_: torch.optim.AdamW
+    lr: 7.0e-05
+  func_recons:
+    _target_: teach.model.losses.recons.Recons
+  func_latent:
+    _target_: teach.model.losses.recons.Recons
+  func_kl:
+    _target_: teach.model.losses.KLLoss
+  modelname: teach
+  _target_: teach.model.teach.TEACH
+  latent_dim: 256
+  vae: true
+  transforms: ${transforms}
+  ff_size: 1024
+  num_layers: 6
+  num_head: ${model.num_layers}
+  droupout: 0.1
+  activation: gelu
+  nvids_to_save: 5
+  lr_scheduler: null
+  motion_branch: true
+  teacher_forcing: false
+  hist_frames: 5
+  z_prev_text: false
+machine:
+  name: server
+  batch_size: 4
+  smpl_batch_size: 16
+  num_workers: 8
+  trainer:
+    gpus: 1
+    auto_select_gpus: true
+trainer:
+  auto_select_gpus: ${machine.trainer.auto_select_gpus}
+  benchmark: false
+  max_epochs: 1003
+  gpus: ${machine.trainer.gpus}
+  log_every_n_steps: 1
+  deterministic: false
+  detect_anomaly: false
+  enable_progress_bar: true
+  check_val_every_n_epoch: 100
+  limit_train_batches: 1.0
+  limit_val_batches: 1.0
+sampler:
+  _target_: teach.data.sampling.FrameSampler
+  request_frames: null
+  sampling: conseq
+  sampling_step: 1
+  threshold_reject: 0.75
+  max_len: 750
+  min_len: 15
+logger:
+  logger_name: none
+  version: ${run_id}
+  project: null
+callback:
+  latest_ckpt:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    dirpath: ${path.working_dir}/checkpoints
+    filename: latest-{epoch}
+    monitor: step
+    mode: max
+    every_n_epochs: 100
+    save_top_k: -1
+    save_last: true
+  best_ckpt:
+    _target_: pytorch_lightning.callbacks.ModelCheckpoint
+    dirpath: ${path.working_dir}/checkpoints
+    filename: best
+    monitor: Metrics/APE_root
+    mode: min
+    every_n_epochs: 1
+    save_top_k: 1
+  progress:
+    _target_: teach.callback.ProgressLogger
+  render:
+    _target_: teach.callback.RenderCallback
+    every_n_epochs: 600
+    num_workers: ${machine.num_workers}
+    save_last: true
+    nvids_to_save: 2
+    bm_path: ${path.data}
+    modelname: ${model.modelname}
+  lr_logging:
+    _target_: pytorch_lightning.callbacks.LearningRateMonitor
+    logging_interval: epoch
+path:
+  deps: ${code_path:./deps}
+  data: ${code_path:./data}
+  code_dir: ${code_path:}
+  working_dir: ${working_path:""}
+experiment: baseline
+project: teach
+seed: 42
+resume: null
+logger_level: INFO
+run_id: ${generate_id:}
+transforms: ${data.transforms}

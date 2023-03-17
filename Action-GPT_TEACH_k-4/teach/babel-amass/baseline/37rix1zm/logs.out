@@ -1,0 +1,7 @@
+[16/03/23 18:41:34][__main__][INFO] - Training script. The outputs will be stored in:
+[16/03/23 18:41:34][__main__][INFO] - The working directory is:/data3/charades/sai.shashank/ICME_Submission/actiongpt/teach_bs4_gpu4_gpt3_k-4/teach/babel-amass/baseline/37rix1zm
+[16/03/23 18:41:34][__main__][INFO] - Loading libraries
+[16/03/23 18:41:35][__main__][INFO] - Libraries loaded
+[16/03/23 18:41:35][__main__][INFO] - Set the seed to 42
+[16/03/23 18:41:35][pytorch_lightning.utilities.seed][INFO] - Global seed set to 42
+[16/03/23 18:41:35][__main__][INFO] - Loading data module
