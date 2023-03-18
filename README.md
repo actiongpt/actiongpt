@@ -118,9 +118,7 @@ To install the dependencies please follow the next steps:
   
 - Action-GPT-MotionCLIP:
   - Follow the below command to sample from the test set. The below command creates two directories named `ground_truth` and `action_gpt` in the path provided for the parameter `generations`. Both the directories `ground_truth` and `action_gpt` contain the npy files of the motion sequences corresponding to the test set text descriptions. Using the npy files created and the evaluation code provided in [TEACH](https://github.com/athn-nik/teach#sampling--evaluation) one can generate the metrics as provided in the paper.
-  - ```
-   python sampling.py ./exps/paper-model/checkpoint_0100.pth.tar --generations path/to/store/sampled/generations
-  ```
+  - ```python sampling.py ./exps/paper-model/checkpoint_0100.pth.tar --generations path/to/store/sampled/generations```
 
 ## Citation
 
