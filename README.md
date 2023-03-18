@@ -97,20 +97,30 @@ To install the dependencies please follow the next steps:
 ## Running the Demo
 - Action-GPT-TEACH (or) Action-GPT-TEMOS
   - Check out the steps to run the demo on any arbitary text descriptions from [here](https://github.com/athn-nik/teach#running-the-demo)
-  - The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory.
+  - The `path/to/experiment` directory is `pretrained_model` in the respective `Action-GPT_TEACH_k-4` or `Action-GPT_TEMOS_k-4` directory, which can be downloaded from [here](https://zenodo.org/record/7747323#.ZBW4YdJBxuT).
   - NOTE : As Action-GPT-TEMOS is trained for single text descriptions, the demo can be executed for only single text prompts. 
 
 - Action-GPT-MotionCLIP:
   - Check out the steps to generate motion from text [here](https://github.com/GuyTevet/MotionCLIP#1-text-to-motion)
-  - The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory.
-
-Pretrained Models and code of Action-GPT-TEMOS and Action-GPT-MotionCLIP coming soon.
+  - The `./exps/paper-model` directory is `pretrained_model` in `Action-GPT_MotionCLIP_k-4` directory, which can be downloaded from [here](https://zenodo.org/record/7747323#.ZBW4YdJBxuT)
 
 ## Training
-Coming soon.
+- Action-GPT-TEACH (or) Action-GPT-TEMOS
+  - Check out the steps to train the model from [here](https://github.com/athn-nik/teach#training)
+  
+- Action-GPT-MotionCLIP:
+  - Check out the steps to train the model from [here](https://github.com/GuyTevet/MotionCLIP#train-your-own)
 
 ## Sampling and Evaluation
-Coming soon.
+- Action-GPT-TEACH (or) Action-GPT-TEMOS
+  - Check out the steps to sample and evaluate the model from [here](https://github.com/athn-nik/teach#sampling--evaluation)
+  - NOTE : For Action-GPT-TEMOS there are no align and slerp parameters to be passed as the model is trained for single text descriptions.
+  
+- Action-GPT-MotionCLIP:
+  - Follow the below command to sample from the test set. The below command creates two directories named `ground_truth` and `action_gpt` in the path provided for the parameter `generations`. Both the directories `ground_truth` and `action_gpt` contain the npy files of the motion sequences corresponding to the test set text descriptions. Using the npy files created and the evaluation code provided in [TEACH](https://github.com/athn-nik/teach#sampling--evaluation) one can generate the metrics as provided in the paper.
+  - ```
+   python sampling.py ./exps/paper-model/checkpoint_0100.pth.tar --generations path/to/store/sampled/generations
+  ```
 
 ## Citation
 
